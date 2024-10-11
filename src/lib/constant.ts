@@ -1,0 +1,32 @@
+export const costumes = [
+  "Vampiro",
+  "Bruja",
+  "Demonio",
+  "Zombie",
+  "Hombre lobo",
+  "Fantasma",
+  "Momia",
+  "Pirata",
+  "Asesino",
+  "Payaso",
+  "Mago",
+  "Hada",
+  "Caza fantasmas",
+];
+
+export const costumesToCld = {
+  Vampiro: "vampire",
+  Bruja: "witch",
+  Esqueleto: "skeleton",
+  Zombie: "zombie",
+  "Hombre lobo": "werewolf",
+  Fantasma: "ghost",
+  Momia: "mummy",
+  Pirata: "pirate",
+  Demonio: "red devil",
+  Asesino: "serial killer",
+  Payaso: "killer clown",
+  Mago: "wizard",
+  Hada: "fairy",
+  "Caza fantasmas": "ghostbusters",
+};

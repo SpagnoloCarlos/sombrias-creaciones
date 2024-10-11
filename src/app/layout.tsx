@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -24,11 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="es" className="dark">
+      <body className={`${poppins.className} old-film-effect antialiased`}>
         {children}
+        <div className="grain-effect" />
+        <div className="scratch-lines" />
+        <div className="scratch-lines scratch-2" />
+        <div className="scratch-lines scratch-3" />
+        <div className="flicker" />
+        <div className="vignette" />
       </body>
     </html>
   );
