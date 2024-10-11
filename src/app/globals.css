@@ -79,12 +79,16 @@ body {
 }
 
 .old-film-effect {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
   padding: 20px;
   filter: sepia(0.4) contrast(1.3) brightness(0.9); /* Filtros para dar un tono envejecido */
   overflow: hidden;
-  min-height: 100vh;
+  min-height: 100dvh;
   height: 100%;
+  z-index: -1;
 }
 
 /* Simulación de granos de película */

@@ -1,4 +1,5 @@
 import Customization from "@/components/Customization";
+import { eater } from "@/lib/fonts";
 import { getCldImageUrl } from "next-cloudinary";
 
 const getImageUrl = async (id: string) => {
@@ -14,7 +15,9 @@ export default async function Photo({ params }: { params: { id: string } }) {
   console.log(imageUrl);
   return (
     <main className="flex h-full min-h-dvh flex-col items-center gap-8 px-4 py-12">
-      <h1 className="text-primary text-center text-4xl font-bold">
+      <h1
+        className={`${eater.className} text-primary text-center text-4xl font-bold`}
+      >
         Vamos a probarte un disfraz
       </h1>
       <Customization imageUrl={imageUrl} imageId={id} />

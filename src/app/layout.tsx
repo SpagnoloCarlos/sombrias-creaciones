@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+import { poppins } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,14 +14,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <body className={`${poppins.className} old-film-effect antialiased`}>
+      <body className={`${poppins.className} antialiased`}>
         {children}
-        <div className="grain-effect" />
-        <div className="scratch-lines" />
-        <div className="scratch-lines scratch-2" />
-        <div className="scratch-lines scratch-3" />
-        <div className="flicker" />
-        <div className="vignette" />
+        <div className="old-film-effect">
+          <div className="grain-effect" />
+          <div className="scratch-lines" />
+          <div className="scratch-lines scratch-2" />
+          <div className="scratch-lines scratch-3" />
+          <div className="flicker" />
+          <div className="vignette" />
+        </div>
       </body>
     </html>
   );
