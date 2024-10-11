@@ -23,8 +23,18 @@ import {
   SelectValue,
 } from "./ui/select";
 import { costumes, costumesToCld } from "@/lib/constant";
-import { ArrowLeft, Ghost, Share } from "lucide-react";
+import {
+  ArrowLeft,
+  Facebook,
+  Ghost,
+  Linkedin,
+  MessageCircle,
+  Share2,
+  Twitter,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Popover, PopoverTrigger } from "./ui/popover";
+import { PopoverContent } from "@radix-ui/react-popover";
 
 const Customization = ({
   imageUrl,
@@ -58,11 +68,6 @@ const Customization = ({
         preserveGeometry: true,
       },
     });
-    // const url = await getCldImageUrl({
-    //   src: imageId,
-    //   replaceBackground:
-    //     "add an alien invasion in the field in the background of the image with aliens descending from the ships",
-    // });
 
     setUrl(url);
     if (img) {
@@ -71,6 +76,31 @@ const Customization = ({
         setShowShare(true);
       };
     }
+  };
+
+  const shareImage = (platform: string) => {
+    const text = encodeURIComponent(
+      `Mira mi disfraz para Halloween creado con IA en HalloIA`,
+    );
+    const imageUrl = encodeURIComponent(url);
+    let shareUrl = "";
+
+    switch (platform) {
+      case "Twitter":
+        shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${imageUrl}`;
+        break;
+      case "Facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${imageUrl}`;
+        break;
+      case "LinkedIn":
+        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${imageUrl}&title=${text}`;
+        break;
+      case "WhatsApp":
+        shareUrl = `https://wa.me/?text=${text}%20${imageUrl}`;
+        break;
+    }
+
+    window.open(shareUrl, "_blank");
   };
 
   return (
@@ -114,43 +144,76 @@ const Customization = ({
             </Button>
           </form>
         </Form>
-        <div className="flex flex-col gap-4">
-          <Button
-            className="w-full gap-2"
-            onClick={() => router.push("/")}
-            disabled={loading}
-          >
-            <ArrowLeft />
-            Subir otra foto
-          </Button>
-          {showShare && (
-            <Button
-              className="w-full gap-2"
-              onClick={() => router.push("/")}
-              disabled={loading}
-            >
-              <Share />
-              Compartir
-            </Button>
-          )}
-        </div>
+        <Button
+          className="w-full gap-2"
+          onClick={() => router.push("/")}
+          disabled={loading}
+        >
+          <ArrowLeft />
+          Subir otra foto
+        </Button>
       </div>
-      <div className="flex flex-col items-center gap-4">
-        <div className="bg-muted relative rounded-lg p-4">
-          <img
-            id="new-image"
-            className="h-full max-h-[500px] min-h-[400px] max-w-7xl rounded-md object-contain"
-            src={url}
-            alt={"Imagen generada"}
-          />
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-50">
-              <div className="animate-bounce">
-                <Ghost className="h-16 w-16 text-orange-500" />
-              </div>
+
+      <div className="bg-muted relative rounded-lg p-4">
+        <img
+          id="new-image"
+          className="h-full max-h-[500px] min-h-[400px] max-w-7xl rounded-md object-contain"
+          src={url}
+          alt={"Imagen generada"}
+        />
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-50">
+            <div className="animate-bounce">
+              <Ghost className="h-16 w-16 text-orange-500" />
             </div>
-          )}
-        </div>
+          </div>
+        )}
+        {showShare && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button className="absolute right-5 top-5 bg-gray-800 bg-opacity-70 hover:bg-opacity-100">
+                <Share2 className="mr-2 h-4 w-4" />
+                Compartir
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-40 border-orange-300 bg-gray-800">
+              <div className="grid">
+                <Button
+                  variant="ghost"
+                  onClick={() => shareImage("Twitter")}
+                  className="w-full justify-start"
+                >
+                  <Twitter className="mr-2 h-4 w-4" />
+                  Twitter
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => shareImage("Facebook")}
+                  className="w-full justify-start"
+                >
+                  <Facebook className="mr-2 h-4 w-4" />
+                  Facebook
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => shareImage("LinkedIn")}
+                  className="w-full justify-start"
+                >
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  LinkedIn
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => shareImage("WhatsApp")}
+                  className="w-full justify-start"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  WhatsApp
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
     </div>
   );

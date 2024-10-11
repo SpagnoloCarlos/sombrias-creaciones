@@ -9,7 +9,6 @@ const UploadWidget = () => {
 
   const handleSuccess = (results: any) => {
     const publicId = results?.["info"]?.["public_id"];
-    console.log(results);
 
     if (publicId) {
       router.push(`/photo/${publicId}`);
@@ -39,17 +38,17 @@ const UploadWidget = () => {
         },
         styles: {
           palette: {
-            window: "#0a0a0a",
-            windowBorder: "#7c3aed",
-            tabIcon: "#7c3aed",
+            window: "#292524",
+            windowBorder: "#ea580c",
+            tabIcon: "#ea580c",
             menuIcons: "#fff",
-            textDark: "#0a0a0a",
+            textDark: "#292524",
             textLight: "#FFFFFF",
-            link: "#7c3aed",
+            link: "#ea580c",
             error: "#F44235",
             inProgress: "#0078FF",
             complete: "#20B832",
-            sourceBg: "#dfdfdf",
+            sourceBg: "#413f3e",
           },
           frame: {
             background: "#0E2F5B99",

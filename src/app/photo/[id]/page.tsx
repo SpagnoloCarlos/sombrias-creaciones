@@ -13,7 +13,7 @@ export default async function Photo({ params }: { params: { id: string } }) {
   const imageUrl = await getImageUrl(id);
   console.log(imageUrl);
   return (
-    <main className="my-12 flex flex-col items-center gap-8 px-4">
+    <main className="flex h-full min-h-dvh flex-col items-center gap-8 px-4 py-12">
       <h1 className="text-primary text-center text-4xl font-bold">
         Vamos a probarte un disfraz
       </h1>
