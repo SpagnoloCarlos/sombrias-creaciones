@@ -1,8 +1,9 @@
 import { object, string } from "zod";
 
 export const costumeSchema = object({
-  costume: string({ required_error: "Seleccione un disfraz" }).min(
+  costume: string({ required_error: "Selecciona un disfraz" }).min(
     1,
-    "Seleccione un disfraz",
+    "Selecciona un disfraz",
   ),
+  stage: string().optional(),
 });

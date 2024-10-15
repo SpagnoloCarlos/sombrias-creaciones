@@ -30,3 +30,25 @@ export const costumesToCld = {
   Hada: "fairy",
   "Caza fantasmas": "ghostbusters",
 };
+
+export const stages = [
+  "Selecciona un escenario",
+  "Apocalipsis zombie",
+  "Invasión alienígena",
+  "Infierno",
+  "Cementerio",
+  "Caza embrujada",
+  "Ciudad destruida",
+  "Bosque siniestro",
+];
+
+export const stagesToCld = {
+  "Selecciona un escenario": "",
+  "Apocalipsis zombie": "zombie apocalypse",
+  "Invasión alienígena": "alien invasion",
+  Infierno: "hell",
+  Cementerio: "cemetery",
+  "Caza embrujada": "haunted house",
+  "Ciudad destruida": "destroyed city",
+  "Bosque siniestro": "sinister forest",
+};

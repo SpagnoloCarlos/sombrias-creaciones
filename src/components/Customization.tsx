@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { costumes, costumesToCld } from "@/lib/constant";
+import { costumes, costumesToCld, stages, stagesToCld } from "@/lib/constant";
 import {
   ArrowLeft,
   Facebook,
@@ -51,6 +51,7 @@ const Customization = ({
     resolver: zodResolver(costumeSchema),
     defaultValues: {
       costume: "",
+      stage: "",
     },
   });
 
@@ -58,18 +59,26 @@ const Customization = ({
     setLoading(true);
     const img = document?.querySelector("#new-image") as HTMLImageElement;
     const costume = values.costume;
-    const promp = `a ${costumesToCld[costume]} costume`;
-
-    const url = await getCldImageUrl({
+    const stage = values.stage;
+    const costumePromp = `a ${costumesToCld[costume]} costume`;
+    console.log(values);
+    const config = {
       src: imageId,
       replace: {
         from: "clothes",
-        to: promp,
+        to: costumePromp,
         preserveGeometry: true,
       },
-    });
+    };
 
+    if (stage && stage !== "Selecciona un escenario") {
+      const stagePromp = `add ${stagesToCld[stage]} to the background`;
+      config["replaceBackground"] = stagePromp;
+    }
+
+    const url = await getCldImageUrl(config);
     setUrl(url);
+
     if (img) {
       img.onload = () => {
         setLoading(false);
@@ -105,10 +114,10 @@ const Customization = ({
 
   return (
     <div className="flex flex-col gap-8 md:flex-row">
-      <div className="border-border flex flex-col justify-between gap-4 rounded-lg border-2 border-dashed p-8">
+      <div className="flex w-full max-w-full flex-col justify-between gap-4 rounded-lg border-2 border-dashed border-border p-8 md:min-w-[300px]">
         <Form {...form}>
           <form
-            className="flex flex-col gap-4"
+            className="flex w-full flex-col gap-4"
             onSubmit={form.handleSubmit(handleSubmit)}
           >
             <FormField
@@ -116,7 +125,7 @@ const Customization = ({
               name="costume"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Selecciona un disfraz de la lista</FormLabel>
+                  <FormLabel>Elije un disfraz de la lista</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -135,12 +144,40 @@ const Customization = ({
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="stage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Elige el escenario que desees (opcional)
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    disabled={loading}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona un escenario" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {stages.map((stage) => (
+                        <SelectItem key={stage} value={stage}>
+                          {stage}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />
             <Button type="submit" disabled={loading}>
-              Crea tu disfraz
+              Hacer magia
             </Button>
           </form>
         </Form>
@@ -154,7 +191,7 @@ const Customization = ({
         </Button>
       </div>
 
-      <div className="bg-muted relative rounded-lg p-4">
+      <div className="relative rounded-lg bg-muted p-4">
         <img
           id="new-image"
           className="h-full max-h-[500px] min-h-[400px] max-w-7xl rounded-md object-contain"
