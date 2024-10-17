@@ -73,7 +73,6 @@ const Customization = ({
     const optionsCostume = values.optionsCostume;
     const optionsStage = values.optionsStage;
     const selectCostumePromp = `a ${costumesToCld[costume]} costume`;
-    console.log(values);
 
     const config = {
       src: imageId,
@@ -90,8 +89,6 @@ const Customization = ({
         optionsStage === "select" ? stagePromp : stage;
     }
 
-    console.log(config);
-
     const url = await getCldImageUrl(config);
     setUrl(url);
 
@@ -100,9 +97,11 @@ const Customization = ({
         setLoading(false);
         setShowShare(true);
         const newImages = [...storedImages];
-        newImages.push(url);
-        setStoredImages(newImages);
-        setItem({ key: "spooky_images", value: newImages });
+        if (!newImages.includes(url)) {
+          newImages.push(url);
+          setStoredImages(newImages);
+          setItem({ key: "spooky_images", value: newImages });
+        }
       };
     }
   };
