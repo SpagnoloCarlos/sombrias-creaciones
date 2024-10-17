@@ -1,20 +1,13 @@
 "use client";
 
 import { getCldImageUrl } from "next-cloudinary";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { costumeSchema } from "@/lib/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import {
   Select,
   SelectContent,
@@ -35,13 +28,18 @@ import {
 import { useRouter } from "next/navigation";
 import { Popover, PopoverTrigger } from "./ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
+import { getItem, setItem } from "@/lib/storage";
 
 const Customization = ({
   imageUrl,
   imageId,
+  storedImages,
+  setStoredImages,
 }: {
   imageUrl: string;
   imageId: string;
+  storedImages: Array<string>;
+  setStoredImages: Dispatch<React.SetStateAction<Array<string>>>;
 }) => {
   const [url, setUrl] = useState<string>(imageUrl);
   const [loading, setLoading] = useState<boolean>(false);
@@ -83,6 +81,10 @@ const Customization = ({
       img.onload = () => {
         setLoading(false);
         setShowShare(true);
+        const newImages = [...storedImages];
+        newImages.push(url);
+        setStoredImages(newImages);
+        setItem({ key: "spooky_images", value: newImages });
       };
     }
   };
@@ -113,8 +115,8 @@ const Customization = ({
   };
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row">
-      <div className="flex w-full max-w-full flex-col justify-between gap-4 rounded-lg border-2 border-dashed border-border p-8 md:min-w-[300px]">
+    <div className="flex flex-col justify-center gap-8 md:flex-row">
+      <div className="flex w-full max-w-md flex-col justify-between gap-4 rounded-lg border-2 border-dashed border-border p-8 md:min-w-[300px]">
         <Form {...form}>
           <form
             className="flex w-full flex-col gap-4"
