@@ -2,6 +2,7 @@
   "name": "cloudinary-hackathon",
   "version": "0.1.0",
   "private": true,
+  "author": "Carlos Andres Spagnolo",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

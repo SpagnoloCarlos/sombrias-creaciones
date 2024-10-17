@@ -10,10 +10,9 @@ export default function Home() {
         Hallow-IA
       </h1>
       <p className="max-w-2xl text-pretty text-center text-lg">
-        Descubre una variedad de disfraces personalizados con la inteligencia
-        artificial de Cloudinary. Solo necesitas subir una foto de cuerpo
-        completo para comenzar, y podrás ver cómo te ves con diferentes atuendos
-        y escenarios.
+        Descubre una variedad de disfraces generados con inteligencia
+        artificial. Solo necesitas subir una foto de cuerpo completo para
+        comenzar, y podrás ver cómo te ves con diferentes atuendos y escenarios.
       </p>
       <UploadWidget />
     </main>

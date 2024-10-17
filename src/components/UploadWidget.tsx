@@ -34,6 +34,10 @@ const UploadWidget = () => {
               browse: "Subir imagen",
               dd_title_single: "Arrastra y suelta tu imagen aquí",
             },
+            queue: {
+              title_uploading_with_counter: "Subiendo {{num}} imagen",
+              title_processing_with_counter: "Procesando {{num}} imagen",
+            },
           },
         },
         styles: {
