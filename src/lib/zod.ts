@@ -6,4 +6,6 @@ export const costumeSchema = object({
     "Selecciona un disfraz",
   ),
   stage: string().optional(),
+  optionsCostume: string(),
+  optionsStage: string(),
 });

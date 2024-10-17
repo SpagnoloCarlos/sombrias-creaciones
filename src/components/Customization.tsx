@@ -7,7 +7,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { costumeSchema } from "@/lib/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
 import {
   Select,
   SelectContent,
@@ -29,6 +36,9 @@ import { useRouter } from "next/navigation";
 import { Popover, PopoverTrigger } from "./ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
 import { getItem, setItem } from "@/lib/storage";
+import { Input } from "./ui/input";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Label } from "./ui/label";
 
 const Customization = ({
   imageUrl,
@@ -50,6 +60,8 @@ const Customization = ({
     defaultValues: {
       costume: "",
       stage: "",
+      optionsCostume: "select",
+      optionsStage: "select",
     },
   });
 
@@ -58,21 +70,27 @@ const Customization = ({
     const img = document?.querySelector("#new-image") as HTMLImageElement;
     const costume = values.costume;
     const stage = values.stage;
-    const costumePromp = `a ${costumesToCld[costume]} costume`;
+    const optionsCostume = values.optionsCostume;
+    const optionsStage = values.optionsStage;
+    const selectCostumePromp = `a ${costumesToCld[costume]} costume`;
     console.log(values);
+
     const config = {
       src: imageId,
       replace: {
-        from: "clothes",
-        to: costumePromp,
+        from: optionsCostume === "select" ? "clothes" : "ropa",
+        to: optionsCostume === "select" ? selectCostumePromp : costume,
         preserveGeometry: true,
       },
     };
 
     if (stage && stage !== "Selecciona un escenario") {
       const stagePromp = `add ${stagesToCld[stage]} to the background`;
-      config["replaceBackground"] = stagePromp;
+      config["replaceBackground"] =
+        optionsStage === "select" ? stagePromp : stage;
     }
+
+    console.log(config);
 
     const url = await getCldImageUrl(config);
     setUrl(url);
@@ -119,72 +137,200 @@ const Customization = ({
       <div className="flex w-full max-w-md flex-col justify-between gap-4 rounded-lg border-2 border-dashed border-border p-8 md:min-w-[300px]">
         <Form {...form}>
           <form
-            className="flex w-full flex-col gap-4"
+            className="flex h-full w-full flex-col gap-4"
             onSubmit={form.handleSubmit(handleSubmit)}
           >
             <FormField
               control={form.control}
-              name="costume"
+              name="optionsCostume"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Elije un disfraz de la lista</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    disabled={loading}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona tu disfraz" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {costumes.map((costume) => (
-                        <SelectItem key={costume} value={costume}>
-                          {costume}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-md">
+                    Elige como ingresar tu disfraz
+                  </FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={(e) => {
+                        form.setValue("costume", "");
+                        field.onChange(e);
+                      }}
+                      defaultValue={field.value}
+                      defaultChecked={true}
+                      className="flex flex-col space-y-1 md:flex-row md:space-x-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="select" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Lista de disfraces
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="input" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Describe tu disfraz
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
+            {form.getValues("optionsCostume") === "select" && (
+              <FormField
+                control={form.control}
+                name="costume"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Elije un disfraz de la lista *</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      disabled={loading}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona tu disfraz" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {costumes.map((costume) => (
+                          <SelectItem key={costume} value={costume}>
+                            {costume}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            )}
+            {form.getValues("optionsCostume") === "input" && (
+              <FormField
+                control={form.control}
+                name="costume"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Describe el disfraz que deseas *</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Un disfraz de policía"
+                        {...field}
+                        disabled={loading}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
+            <div className="my-2 h-[1px] w-full border border-dashed border-border" />
             <FormField
               control={form.control}
-              name="stage"
+              name="optionsStage"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Elige el escenario que desees (opcional)
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-md">
+                    Elige como ingresar tu escenario
                   </FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    disabled={loading}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona un escenario" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {stages.map((stage) => (
-                        <SelectItem key={stage} value={stage}>
-                          {stage}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={(e) => {
+                        form.setValue("stage", "");
+                        field.onChange(e);
+                      }}
+                      defaultValue={field.value}
+                      defaultChecked={true}
+                      className="flex flex-col space-y-1 md:flex-row md:space-x-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="select" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Lista de escenarios
+                        </FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="input" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Describe tu escenario
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={loading}>
+            {form.getValues("optionsStage") === "select" && (
+              <FormField
+                control={form.control}
+                name="stage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Elige el escenario que desees (opcional)
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      disabled={loading}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona un escenario" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {stages.map((stage) => (
+                          <SelectItem key={stage} value={stage}>
+                            {stage}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            )}
+            {form.getValues("optionsStage") === "input" && (
+              <FormField
+                control={form.control}
+                name="stage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Describe el escenario que deseas (opcional)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Un hospital abandonado"
+                        {...field}
+                        disabled={loading}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
+            <Button
+              className="mt-auto w-full gap-2"
+              type="submit"
+              disabled={loading}
+            >
               Hacer magia
+              <Ghost />
             </Button>
           </form>
         </Form>
         <Button
-          className="w-full gap-2"
+          className="w-full gap-2 border border-primary bg-transparent text-primary hover:bg-primary hover:text-foreground"
           onClick={() => router.push("/")}
           disabled={loading}
         >
