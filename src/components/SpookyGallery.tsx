@@ -28,7 +28,7 @@ const SpookyGallery = ({ storedImages }: { storedImages: Array<string> }) => {
 
   const shareImage = ({ platform, url }: { platform: string; url: string }) => {
     const text = encodeURIComponent(
-      `Mira mi disfraz para Halloween creado con IA en HalloIA`,
+      `Mira mi disfraz para Halloween creado con IA en SombrIAs Creaciones:`,
     );
     const imageUrl = encodeURIComponent(url);
     let shareUrl = "";

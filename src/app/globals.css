@@ -214,3 +214,61 @@ body {
   );
   pointer-events: none;
 }
+
+/*---- Efecto Neón  ----*/
+@keyframes flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow:
+      0 0 5px #ea580c,
+      0 0 10px #ea580c,
+      0 0 20px #ea580c,
+      0 0 40px #ea580c,
+      0 0 80px #ea580c,
+      0 0 100px #ea580c,
+      0 0 200px #ea580c;
+    color: #ffffff;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+    color: #333;
+  }
+}
+
+@keyframes spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(10px, -10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+
+.neon-text {
+  position: relative;
+  color: #ea580c;
+  text-shadow:
+    0 0 5px #ea580c,
+    0 0 10px #ea580c,
+    0 0 20px #ea580c,
+    0 0 40px #ea580c,
+    0 0 80px #ea580c,
+    0 0 100px #ea580c,
+    0 0 200px #ea580c;
+  animation: flicker 1.5s infinite alternate;
+  transform: rotate(13deg);
+  margin: 0 0 0 3px;
+}
