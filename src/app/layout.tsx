@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { poppins } from "@/lib/fonts";
+import OldEffect from "@/components/OldEffect";
 
 export const metadata: Metadata = {
-  title: "Hallow-IA",
+  title: "SombrIAs Creaciones",
   description:
-    "Hallow-IA es una web donde puedes subir una foto y probarte diferentes disfraces generados por inteligencia artificial",
+    "SombrIAs Creaciones es una web donde puedes subir una foto y probarte diferentes disfraces generados por inteligencia artificial",
 };
 
 export default function RootLayout({
@@ -17,14 +18,7 @@ export default function RootLayout({
     <html lang="es" className="dark">
       <body className={`${poppins.className} antialiased`}>
         {children}
-        <div className="old-film-effect">
-          <div className="grain-effect" />
-          <div className="scratch-lines" />
-          <div className="scratch-lines scratch-2" />
-          <div className="scratch-lines scratch-3" />
-          <div className="flicker" />
-          <div className="vignette" />
-        </div>
+        <OldEffect />
       </body>
     </html>
   );
