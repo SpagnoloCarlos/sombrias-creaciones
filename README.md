@@ -98,7 +98,7 @@ La plataforma utiliza la API de **Cloudinary** para aplicar los efectos de disfr
 </CldUploadWidget>
 ```
 
-3. Para más información puedes visitar el video sobre la Hackathon de MiduDev, donde lo explica con más detalles. [Video de Youtube]("https://www.youtube.com/watch?v=7MT1oPDBc5I&t=1808s")
+3. Para más información puedes visitar el video sobre la Hackathon de MiduDev, donde lo explica con más detalles. [Video de YouTube]("https://www.youtube.com/watch?v=7MT1oPDBc5I&t=1808s")
 
 ## 🧛‍♂️ Contribuciones
 
