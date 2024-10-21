@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 const UploadWidget = () => {
   const router = useRouter();
 
-  const handleSuccess = (results: any) => {
+  const handleSuccess = (results) => {
     const publicId = results?.["info"]?.["public_id"];
 
     if (publicId) {

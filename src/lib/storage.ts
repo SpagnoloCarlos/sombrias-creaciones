@@ -8,7 +8,7 @@ export const setItem = ({
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    console.log("Error To Get Items From LocalStorage");
+    console.log("Error To Get Items From LocalStorage: ", error);
   }
 };
 
@@ -17,6 +17,7 @@ export const getItem = (key: string) => {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
