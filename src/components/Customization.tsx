@@ -35,10 +35,9 @@ import {
 import { useRouter } from "next/navigation";
 import { Popover, PopoverTrigger } from "./ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
-import { getItem, setItem } from "@/lib/storage";
+import { setItem } from "@/lib/storage";
 import { Input } from "./ui/input";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Label } from "./ui/label";
 
 const Customization = ({
   imageUrl,
