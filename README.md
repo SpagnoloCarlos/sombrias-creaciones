@@ -2,6 +2,8 @@
 
 Bienvenido a **SombrIAs Creaciones**, una web diseñada para participar de la [Hackathon de Cloudinary]("https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon") en colaboración con [MiduDev]("https://x.com/midudev") (Miguel Ángel Durán), con temática de Halloween. Donde utilizando la inteligencia artificial de Cloudinary, podrás subir una foto y probarte diversos disfraces de monstruos y personajes temáticos de Halloween. Además, podrás sumergirte en escenarios espeluznantes generados automáticamente por IA. ¡Todo esto con un par de clics!
 
+- **Demo:** [SombrIAs Creaciones]("https://sombrias-creaciones.vercel.app/") 🌐;
+
 ## 🚀 Características del Proyecto
 
 - **Generación de disfraces y escenarios de Halloween:** Sube una foto y la IA integrada de Cloudinary, te permitirá transformarte en una amplia variedad de disfraces y colocarte en entornos terroríficos.
