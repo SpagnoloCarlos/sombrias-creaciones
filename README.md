@@ -1,8 +1,8 @@
 # 🎃 SombrIAs Creaaciones 🎃
 
-Bienvenido a **SombrIAs Creaciones**, una web diseñada para participar de la [Hackathon de Cloudinary]("https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon") en colaboración con [MiduDev]("https://x.com/midudev") (Miguel Ángel Durán), con temática de Halloween. Donde utilizando la inteligencia artificial de Cloudinary, podrás subir una foto y probarte diversos disfraces de monstruos y personajes temáticos de Halloween. Además, podrás sumergirte en escenarios espeluznantes generados automáticamente por IA. ¡Todo esto con un par de clics!
+Bienvenido a **SombrIAs Creaciones**, una web diseñada para participar de la [Hackathon de Cloudinary](https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon) en colaboración con [MiduDev](https://x.com/midudev) (Miguel Ángel Durán), con temática de Halloween. Donde utilizando la inteligencia artificial de Cloudinary, podrás subir una foto y probarte diversos disfraces de monstruos y personajes temáticos de Halloween. Además, podrás sumergirte en escenarios espeluznantes generados automáticamente por IA. ¡Todo esto con un par de clics!
 
-- **Demo:** [SombrIAs Creaciones]("https://sombrias-creaciones.vercel.app/") 🌐;
+- **Demo:** [SombrIAs Creaciones](https://sombrias-creaciones.vercel.app/) 🌐;
 
 ## 🚀 Características del Proyecto
 
@@ -14,11 +14,11 @@ Bienvenido a **SombrIAs Creaciones**, una web diseñada para participar de la [H
 
 ## 🛠️ Tecnologías Utilizadas
 
-- [**Next.js**]("https://nextjs.org/"): Framework de React para aplicaciones web rápidas y escalables.
-- [**TailwindCSS**]("https://tailwindcss.com/"): Un framework de utilidades CSS para crear interfaces modernas y eficientes.
-- [**Typescript**]("https://www.typescriptlang.org/"): Un superconjunto de JavaScript que añade tipado estático para un código más seguro y mantenible.
-- [**Shadcn**]("https://ui.shadcn.com/"): Un conjunto de componentes personalizados con soporte para Dark Mode y fácilmente integrables.
-- [**Next Cloudinary**]("https://next.cloudinary.dev/"): SDK de Cloudinary para Next.js, que te permitirá utilizar las herramientas de procesamiento de imágenes y videos..
+- [**Next.js**](https://nextjs.org/): Framework de React para aplicaciones web rápidas y escalables.
+- [**TailwindCSS**](https://tailwindcss.com/): Un framework de utilidades CSS para crear interfaces modernas y eficientes.
+- [**Typescript**](https://www.typescriptlang.org/): Un superconjunto de JavaScript que añade tipado estático para un código más seguro y mantenible.
+- [**Shadcn**](https://ui.shadcn.com/): Un conjunto de componentes personalizados con soporte para Dark Mode y fácilmente integrables.
+- [**Next Cloudinary**](https://next.cloudinary.dev/): SDK de Cloudinary para Next.js, que te permitirá utilizar las herramientas de procesamiento de imágenes y videos..
 
 ## 🌐 Funcionalidades Principales
 
@@ -104,7 +104,7 @@ La plataforma utiliza la API de **Cloudinary** para aplicar los efectos de disfr
 
 ## 🧛‍♂️ Contribuciones
 
-Si te gustaría contribuir a este proyecto, siéntete libre de abrir un pull request o crear un [issue]("https://github.com/SpagnoloCarlos/helmsman-task/issues"). ¡Nos encantaría ver tus sugerencias para hacerlo aún más terrorífico y divertido!
+Si te gustaría contribuir a este proyecto, siéntete libre de abrir un pull request o crear un [issue](https://github.com/SpagnoloCarlos/sombrias-creaciones/issues). ¡Nos encantaría ver tus sugerencias para hacerlo aún más terrorífico y divertido!
 
 ## 📄 Licencia
 
